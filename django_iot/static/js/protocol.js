@@ -18,7 +18,7 @@ socket.on('send/device', function(dataDevice) {
         if (i % dataSetPerChannel === 0) {
           var dataSet = {
             chartId: dataDevice.idDevice + (i + j),
-            data: [dataDevice[map[i+j]]],
+            data: [parseFloat(dataDevice[map[i+j]])],
             label: 'Canal ' + map[i+j],
             borderColor: getRandomColor(),
             borderWidth: 1
@@ -60,7 +60,7 @@ socket.on('send/device', function(dataDevice) {
         if (i % dataSetPerChannel === 0) {
           var dataSet = dataSets[j].data;
           //dataSet.push(dataDevice[map[i]]);
-          addData(chart, new Date(dataDevice.date).toLocaleTimeString(), dataDevice[map[i+j]], j);
+          addData(chart, new Date(dataDevice.date).toLocaleTimeString(), parseFloat(dataDevice[map[i+j]]), j);
         }
       }
     }
