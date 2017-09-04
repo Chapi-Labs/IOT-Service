@@ -44,7 +44,7 @@ function calculateChannels(data, map) {
 }
 
 function findChart(element) {
-  return element.deviceId === this.clientId;
+  return element.deviceId === this.idDevice;
 }
 function addData(chart, label, data, index) {
   chart.data.labels.push(label);

@@ -1,6 +1,6 @@
 var socket = io('http://45.55.162.243:4000');
 var clients = [];
-var map = ['ch1', 'ch2', 'ch3', 'ch4', 'ch5'];
+var map = ['chA', 'chB', 'chC', 'chD', 'Temp'];
 var dataSetPerChannel = 4;
 socket.on('connect', function() {
 });
@@ -17,7 +17,7 @@ socket.on('send/device', function(dataDevice) {
           //create new data set.
         if (i % dataSetPerChannel === 0) {
           var dataSet = {
-            chartId: dataDevice.clientId + (i + j),
+            chartId: dataDevice.idDevice + (i + j),
             data: [dataDevice[map[i+j]]],
             label: 'Canal ' + map[i+j],
             borderColor: getRandomColor(),
@@ -28,16 +28,16 @@ socket.on('send/device', function(dataDevice) {
       }
       console.log(dataSets);
       var canvas = document.createElement('canvas');
-      canvas.id     = dataDevice.clientId+i;
+      canvas.id     = dataDevice.idDevice+i;
       canvas.width  = 300;
       canvas.height = 300;
       canvas.style.display = 'inline-block';
       var div = document.getElementById('charts')
       div.appendChild(canvas);
-      var chart = insertChart(canvas, dataDevice.clientId, dataSets, new Date(dataDevice.date).toLocaleTimeString());
+      var chart = insertChart(canvas, dataDevice.idDevice, dataSets, new Date(dataDevice.date).toLocaleTimeString());
       clients.push({
-        deviceId: dataDevice.clientId,
-        chartId: dataDevice.clientId+i,
+        deviceId: dataDevice.idDevice,
+        chartId: dataDevice.idDevice+i,
         dataChart: dataSets,
         chart: chart
       });
