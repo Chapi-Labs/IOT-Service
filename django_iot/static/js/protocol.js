@@ -1,4 +1,4 @@
-var socket = io('http://localhost:4000');
+var socket = io('http://45.55.162.243:4000');
 var clients = [];
 var map = ['ch1', 'ch2', 'ch3', 'ch4', 'ch5'];
 var dataSetPerChannel = 4;
