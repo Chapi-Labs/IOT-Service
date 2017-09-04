@@ -1,7 +1,7 @@
 var socket = io('http://45.55.162.243:4000');
 var clients = [];
 var map = ['chA', 'chB', 'chC', 'chD', 'Temp'];
-var dataSetPerChannel = 4;
+var dataSetPerChannel = 1;
 socket.on('connect', function() {
 });
 socket.on('send/device', function(dataDevice) {
