@@ -11,12 +11,13 @@ might make sense to replace the whole Django WSGI application with a custom one
 that later delegates to the Django one. For example, you could introduce WSGI
 middleware here, or combine a Django application with an application of another
 framework.
-
+uwsgi --http :8000 --chdir /home/web --wsgi-file home/web/config/wsgi.py --virtualenv /home/env_web
 """
 import os
 import sys
 
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise
 
 # This allows easy placement of apps within the interior
 # django_iot directory.
@@ -39,5 +40,6 @@ application = get_wsgi_application()
 if os.environ.get('DJANGO_SETTINGS_MODULE') == 'config.settings.production':
     application = Sentry(application)
 # Apply WSGI middleware here.
+application = WhiteNoise(application, root='/home/web/staticfiles')
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
