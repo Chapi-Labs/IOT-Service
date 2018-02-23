@@ -38,7 +38,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
 # setting points here.
 application = get_wsgi_application()
 if os.environ.get('DJANGO_SETTINGS_MODULE') == 'config.settings.production':
-    application = Sentry(application)
+    application = (application)
 # Apply WSGI middleware here.
 application = WhiteNoise(application, root='/home/web/staticfiles')
 # from helloworld.wsgi import HelloWorldApplication
