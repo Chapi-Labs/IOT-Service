@@ -1,48 +1,168 @@
-{% extends "account/base.html" %}
+<!DOCTYPE html>
 
-{% load i18n %}
-{% load account socialaccount %}
-{% load crispy_forms_tags %}
+<!--
+  Name: Con - Admin Dashboard with Material Design
+  Version: 3.0.0
+  Author: _nK
+  Website: http://nkdev.info
+  Purchase: http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=_nK
+  Support: http://nk.ticksy.com
+  License: You must have a valid license purchased only from ThemeForest (the above link) in order to legally use the theme for your project.
+  Copyright 2016.
+-->
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+<html lang="en">
 
-{% block inner %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Newton Labs">
+    <link rel="icon" href="assets/_con/images/icon.png">
+    {% load static %}
+    {% load i18n %}
+    {% load account socialaccount %}
+    {% load crispy_forms_tags %}
 
-<h1>{% trans "Sign In" %}</h1>
+    <title>Iniciar Sesión</title>
 
-{% get_providers as socialaccount_providers %}
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+    <!-- nanoScroller -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bower_components/nanoscroller/bin/css/nanoscroller.css' %}" />
 
-<div class="socialaccount_ballot">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bower_components/fontawesome/css/font-awesome.min.css' %}" />
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/material-design-icons.min.css' %}" />
 
-  <div class="login-or">{% trans 'or' %}</div>
+    <!-- IonIcons -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bower_components/ionicons/css/ionicons.min.css' %}" />
 
-</div>
+    <!-- WeatherIcons -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bower_components/weather-icons/css/weather-icons.min.css' %}" />
 
-{% include "socialaccount/snippets/login_extra.html" %}
 
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-</form>
 
-{% endblock %}
 
+
+
+
+
+
+    <!-- Main -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/con-base.css' %}" />
+
+    <!--[if lt IE 9]>
+        <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body>
+
+    <section id="sign-in">
+
+        <!-- Background Bubbles -->
+        <canvas id="bubble-canvas"></canvas>
+        <!-- /Background Bubbles -->
+
+        <!-- Sign In Form -->
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+
+            <div class="row links">
+              <div class="col s6 logo">
+                  <img src="assets/_con/images/logo-white.png" alt="">
+              </div>
+              <div class="col s6 right-align">
+                  <strong>Iniciar Sesión</strong> / <a href="{% url 'account_signup' %}">Crear Cuenta</a></div>
+            </div>
+
+            <div class="card-panel clearfix">
+
+
+                <div class="row">
+                    <div class="col"></div>
+                </div>
+
+                <!-- Username -->
+                <div class="input-field">
+                    <i class="fa fa-user prefix"></i>
+
+                     {{ form.login }}
+                    <label for="username-input">Username</label>
+                </div>
+                <!-- /Username -->
+
+                <!-- Password -->
+                <div class="input-field">
+                    <i class="fa fa-unlock-alt prefix"></i>
+                   {{ form.password }}
+                    <label for="password-input">Password</label>
+                </div>
+                <!-- /Password -->
+                 {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" checked />
+                        <span class="lever"></span>
+                        Recordarme
+                    </label>
+                </div>
+
+                <button  type="submit" class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover">Iniciar Sesión</button>
+            </div>
+
+            <div class="links right-align">
+                <a href="{% url 'account_reset_password' %}">Recuperar Contraseña</a>
+            </div>
+
+        </form>
+
+        <!-- /Sign In Form -->
+
+    </section>
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+
+    <!-- jQuery RAF (improved animation performance) -->
+    <script type="text/javascript" src="{% static 'bower_components/jquery-requestAnimationFrame/dist/jquery.requestAnimationFrame.min.js' %}"></script>
+
+    <!-- nanoScroller -->
+    <script type="text/javascript" src="{% static 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js' %}"></script>
+
+    <!-- Materialize -->
+    <script type="text/javascript" src="{% static 'bower_components/materialize/bin/materialize.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+    <!-- Sortable -->
+    <script type="text/javascript" src="{% static 'bower_components/Sortable/Sortable.min.js' %}"></script>
+
+    <!-- Main -->
+    <script type="text/javascript" src="{% static 'js/_con.js' %}"></script>
+
+
+    <!-- Google Prettify -->
+    <script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+
+
+</body>
+
+</html>

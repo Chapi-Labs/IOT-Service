@@ -1,4 +1,4 @@
-<aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
+<aside class="yaybar yay-shrink yay-gestures">
   <div class="top">
     <div>
       <!-- Sidebar toggle -->
@@ -17,15 +17,26 @@
   </div>
   <div class="nano">
     <div class="nano-content">
+
       <ul>
+        {% if user.is_authenticated %}
         <li class="yay-user-info">
           <a href="page-profile.html">
             <img src="assets/_con/images/user.jpg" alt="" class="circle">
-            <h3 class="yay-user-info-name">John Doe</h3>
+            <h3 class="yay-user-info-name">{{user.get_username}}</h3>
           </a>
         </li>
+        {% endif %}
         <li class="label">Menu</li>
+        <li>
+            <a href="widgets.html" class=" waves-effect waves-blue"> <i class="fa fa-dashboard"></i> Gráficas en tiempo real </a>
+        </li>
+        <li>
+            <a href="widgets.html" class=" waves-effect waves-blue"> <i class="fa fa-dashboard"></i> Gráficas históricas </a>
+        </li>
+
       </ul>
     </div>
   </div>
 </aside>
+

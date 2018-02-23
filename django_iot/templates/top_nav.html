@@ -8,11 +8,12 @@
     </a>
     <!-- Sidebar toggle -->
     <!-- Logo -->
-    <a href="index.html" class="brand-logo">
-    <span>IOT</span>
+    <a href="/" class="brand-logo">
+    <span>Internet of Things Software</span>
     </a>
     <!-- /Logo -->
     <!-- Menu -->
+    {% if user.is_authenticated %}
     <ul>
       <li>
         <a href="#!" class="search-bar-toggle">
@@ -21,23 +22,12 @@
       </li>
       <li class="user">
         <a class="dropdown-button" data-activates="user-dropdown" href="#!">
-        John Doe <i class="mdi-navigation-expand-more right"></i>
+        {{user.get_username}} <i class="mdi-navigation-expand-more right"></i>
         </a>
         <ul id="user-dropdown" class="dropdown-content">
           <li>
             <a href="page-profile.html">
             <i class="fa fa-user"></i> Profile
-            </a>
-          </li>
-          <li>
-            <a href="mail-inbox.html">
-            <i class="fa fa-envelope"></i> Messages
-            <span class="badge new">2 new</span>
-            </a>
-          </li>
-          <li>
-            <a href="#!">
-            <i class="fa fa-cogs"></i> Settings
             </a>
           </li>
           <li class="divider"></li>
@@ -49,6 +39,7 @@
         </ul>
       </li>
     </ul>
+    {% endif %}
     <!-- /Menu -->
   </div>
 </nav>
